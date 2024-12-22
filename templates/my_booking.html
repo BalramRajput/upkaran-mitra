@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2><u>Bookings:</u></h2>
+<h3>Equipments Borrowed:</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Equipment Name</th>
+            <th>Borrowed From</th>
+            <th>Booked At</th>
+            <th>Started At</th>
+            <th>Completed At</th>
+            <th>Amount</th>
+            <th>Payment Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if equipments_borrowed %}
+            {% for booking in equipments_borrowed %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ booking.equipment_name }}</td>
+                    <td>{{ booking.borrowed_from_name }}</td>
+                    <td>{{ booking.booked_at }}</td>
+                    <td>{{ booking.started_at }}</td>
+                    <td>{{ booking.completed_at }}</td>
+                    <td>{{ booking.amount }}</td>
+                    <td>{{ 'Paid' if booking.is_payment_done else 'Pending' }}</td>
+                    <td>
+                        <button class="btn" onclick="openEditModal('{{ booking.id }}', '{{ booking.started_at is not none }}', '{{ booking.completed_at is not none }}')">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="9" class="text-center">No bookings found</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+<br/>
+<h3>Equipments Lent:</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Equipment Name</th>
+            <th>Lent To</th>
+            <th>Booked At</th>
+            <th>Started At</th>
+            <th>Completed At</th>
+            <th>Amount</th>
+            <th>Payment Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if equipments_lent %}
+            {% for booking in equipments_lent %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ booking.equipment_name }}</td>
+                    <td>{{ booking.lent_to_name }}</td>
+                    <td>{{ booking.booked_at }}</td>
+                    <td>{{ booking.started_at }}</td>
+                    <td>{{ booking.completed_at }}</td>
+                    <td>{{ booking.amount }}</td>
+                    <td>{{ 'Paid' if booking.is_payment_done else 'Pending' }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="8" class="text-center">No bookings found</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Update Booking</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn btn-success" id="startBooking">Start Booking</button>
+                <button type="button" class="btn btn-danger" id="completeBooking">Complete Booking</button>
+            </div>
+            <p id="bookingCompletedMessage" style="display: none; padding-left: 18px;">The booking is already completed.</p>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if session['id'] %}
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+<div class="container">
+    <h1>Equipment Categories</h1>
+    <form id="searchForm">
+        <div class="form-group">
+            <label for="category">Select Category:</label>
+            <select class="form-control" id="category" name="category">
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="searchEquipments()">Search</button>
+    </form>
+    <div id="equipmentsDiv" class="hidden">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Rate</th>
+                    <th>Unit</th>
+                    <th>Specification</th>
+                    <th>Owner</th>
+                    <th>Village</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="equipmentsTableBody">
+                <!-- Equipment rows will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    <div id="noEquipmentsDiv" class="hidden">
+        <p>No equipments found in this category.</p>
+    </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Equipment Booking</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row mb-3">
+                    <label class="col-sm-4 col-form-label">Name:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="equipmentName" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-sm-4 col-form-label">Rate:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="equipmentRate" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-sm-4 col-form-label">Unit:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="equipmentUnit" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-sm-4 col-form-label">Specification:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="equipmentSpecification" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-sm-4 col-form-label">Owner:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="ownerName" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-sm-4 col-form-label">Village:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="equipmentVillage" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-sm-4 col-form-label">Contact:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="ownerContact" disabled/>
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="rentalDuration" class="col-sm-4 col-form-label">Rental Duration (hours):</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="rentalDuration" min="1">
+                    </div>
+                </div>
+                <p id="totalAmount" class="text-right"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="submitBooking">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% else %}
+<p>Please <a href="{{ url_for('login') }}">login</a> to view equipment categories.</p>
+{% endif %}
+{% endblock %}

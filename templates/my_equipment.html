@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2><u>Equipments:</u></h2>
+<a href="{{ url_for('add_equipment') }}" class="btn btn-primary mb-3">Add Equipment</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Used For</th>
+            <th>Image</th>
+            <th>Rate</th>
+            <th>Unit</th>
+            <th>Specification</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if equipments %}
+            {% for equipment in equipments %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ equipment.name }}</td>
+                    <td>{{ equipment.category_name }}</td>
+                    <td>{{ equipment.used_for }}</td>
+                    <td>
+                        {% if equipment.image %}
+                            <img src="data:image/jpeg;base64,{{ equipment.image | b64encode }}" alt="Equipment Image" width="100">
+                        {% else %}
+                            No Image
+                        {% endif %}
+                    </td>                    
+                    <td>{{ equipment.rate }}</td>
+                    <td>{{ equipment.unit }}</td>
+                    <td>{{ equipment.specification }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="8" class="text-center">No equipments found</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
