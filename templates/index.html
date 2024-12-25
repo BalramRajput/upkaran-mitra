@@ -114,6 +114,6 @@
 
 <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 {% else %}
-<p>Please <a href="{{ url_for('login') }}">login</a> to view equipment categories.</p>
+<p>Please <a href="{{ url_for('user_bp.login') }}">login</a> to view equipment categories.</p>
 {% endif %}
 {% endblock %}
