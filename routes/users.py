@@ -14,7 +14,7 @@ def login():
 
         if result:
             session['id'] = result[0]
-            flash("Login successful!", "success")
+            flash(f"Welcome {result[1]}!", "success")
             return redirect(url_for('index'))
         else:
             flash("Invalid credentials.", "danger")
@@ -42,7 +42,7 @@ def register():
             id = db.execute_write_query(query, (name, phone_number, email, password, address_id))
 
             if id:
-                flash(f"Registration successful with id: {id}", "success")
+                flash(f"Registration successful!", "success")
                 return redirect(url_for('user_bp.login'))
             else:
                 flash("Error during user registration.", "danger")
@@ -59,6 +59,22 @@ def register():
         districts = db.execute_select_all_query(query_district)
         sub_districts = db.execute_select_all_query(query_sub_district)
         return render_template('register.html', countries=countries, states=states, districts=districts, sub_districts=sub_districts)
+
+@user_bp.route('/user/<int:user_id>', methods=['GET'])
+def get_user_details(user_id):
+    query = """
+    SELECT u.name, u.phone_number, u.email, v.village_name, sd.sub_district_name FROM user u 
+    JOIN address a ON u.address_id = a.id
+    JOIN village v ON a.village_id = v.village_id
+    JOIN sub_district sd ON v.sub_district_id = sd.sub_district_id
+    WHERE u.id = ?
+    """
+    users = db.execute_select_all_query(query, (user_id,))
+    if users:
+        user = users[0]
+        return jsonify(user), 200
+    else:
+        return jsonify({"error": "User not found"}), 404
 
 @user_bp.route('/logout')
 def logout():

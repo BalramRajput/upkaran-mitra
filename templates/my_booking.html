@@ -23,7 +23,11 @@
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td>{{ booking.equipment_name }}</td>
-                    <td>{{ booking.borrowed_from_name }}</td>
+                    <td>
+                        <a href="#" data-borrowed-from-id="{{ booking.borrowed_from_id }}">
+                          {{ booking.borrowed_from_name }}
+                        </a>
+                    </td>
                     <td>{{ booking.booked_at }}</td>
                     <td>{{ booking.started_at }}</td>
                     <td>{{ booking.completed_at }}</td>
@@ -64,7 +68,11 @@
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td>{{ booking.equipment_name }}</td>
-                    <td>{{ booking.lent_to_name }}</td>
+                    <td>
+                        <a href="#" data-lent-to-id="{{ booking.lent_to_id }}">
+                          {{ booking.lent_to_name }}
+                        </a>
+                    </td>
                     <td>{{ booking.booked_at }}</td>
                     <td>{{ booking.started_at }}</td>
                     <td>{{ booking.completed_at }}</td>
@@ -94,6 +102,25 @@
                 <button type="button" class="btn btn-danger" id="completeBooking">Complete Booking</button>
             </div>
             <p id="bookingCompletedMessage" style="display: none; padding-left: 18px;">The booking is already completed.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="userDetailsModal" tabindex="-1" role="dialog" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userDetailsModalLabel">User Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody id="userDetailsTable">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
