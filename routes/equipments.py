@@ -99,7 +99,7 @@ def book_equipment():
         """
         db.execute_write_query(query, (equipment_id,))
         flash("Equipment booked successfully!", "success")
-        return redirect(url_for('bookings_dp.my_bookings'))
+        return redirect(url_for('bookings_bp.my_bookings'))
     else:
         flash("Error booking equipment.", "danger")
         return redirect(url_for('index'))
