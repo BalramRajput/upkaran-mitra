@@ -7,39 +7,47 @@
         display: none;
     }
 </style>
-<div class="container">
-    <h3>Equipments: </h3>
-    <form id="searchForm">
-        <div class="form-group">
-            <label for="category">Select Category:</label>
-            <select class="form-control" id="category" name="category">
-                {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
-                {% endfor %}
-            </select>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="mb-4">Explore Available Equipment</h3>
+            <form id="searchForm" class="mb-4">
+                <div class="form-group row">
+                    <label for="category" class="col-sm-2 col-form-label">Select Category:</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="category" name="category">
+                            {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-primary w-100" onclick="searchEquipments()">Search</button>
+                    </div>
+                </div>
+            </form>
+            <div id="equipmentsDiv" class="hidden">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Rate</th>
+                            <th>Unit</th>
+                            <th>Specification</th>
+                            <th>Owner</th>
+                            <th>Village</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="equipmentsTableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div id="noEquipmentsDiv" class="hidden">
+                <p class="text-center">No equipments found in this category.</p>
+            </div>
         </div>
-        <button type="button" class="btn btn-primary" onclick="searchEquipments()">Search</button>
-    </form>
-    <div id="equipmentsDiv" class="hidden">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Rate</th>
-                    <th>Unit</th>
-                    <th>Specification</th>
-                    <th>Owner</th>
-                    <th>Village</th>
-                    <th>Image</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="equipmentsTableBody">
-            </tbody>
-        </table>
-    </div>
-    <div id="noEquipmentsDiv" class="hidden">
-        <p>No equipments found in this category.</p>
     </div>
 </div>
 
