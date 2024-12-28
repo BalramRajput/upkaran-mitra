@@ -1,7 +1,7 @@
 # UpkaranMitra
 #### Video Demo:  https://youtu.be/jAn0FTnIskQ
 #### Description:
-UpkaranMitra is a community-driven platform designed to address a common problem faced by farmers—the high costs of acquiring farming equipment. Often, farmers require specific tools or machines for short durations, making the outright purchase of such equipment impractical and expensive. UpkaranMitra bridges this gap by providing a platform where farmers can borrow and lend farming equipment among themselves, fostering resource-sharing and reducing costs. By connecting equipment owners and borrowers, the project promotes sustainability and collaboration within farming communities.
+UpkaranMitra is a platform designed to address a common problem faced by farmers—the high costs of acquiring farming equipment. Often, farmers require specific tools or machines for short durations, making the outright purchase of such equipment impractical and expensive. UpkaranMitra bridges this gap by providing a platform where farmers can borrow and lend farming equipment among themselves, fostering resource-sharing and reducing costs. By connecting equipment owners and borrowers, the project promotes sustainability and collaboration within farming communities.
 
 This platform is developed using HTML, CSS, JavaScript, Python, Flask, Jinja, and SQLite, ensuring a robust and user-friendly experience for its users.
 
