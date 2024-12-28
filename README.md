@@ -32,7 +32,7 @@ routes/…
 
 This directory contains route handlers that manage application logic for different features:
 
-    init**.py**: Initializes the routes module for Flask.
+    __init__.py: Initializes the routes module for Flask.
 
     bookings.py: Handles endpoints related to booking equipment, including viewing, creating, and managing bookings.
 
